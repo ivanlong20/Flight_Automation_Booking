@@ -1,2 +1,14 @@
-package com.booking.pages;public class BasePage {
+package com.booking.pages;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+public class BasePage {
+    public final WebDriver driver;
+
+    public BasePage(WebDriver driver){
+        this.driver = driver;
+        PageFactory.initElements(driver,this);
+    }
+
+
 }
