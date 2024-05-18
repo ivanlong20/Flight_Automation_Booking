@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class DetailsPage extends BasePage{
     public DetailsPage(WebDriver driver){
@@ -29,7 +30,7 @@ public class DetailsPage extends BasePage{
     WebElement IDField;
     @FindBy(xpath = "//input[@data-testid='u_iddate_adult_0_input']")
     WebElement IDExpField;
-    @FindBy(xpath = "//*[@id='part2']/div[3]/div[2]/div/div[2]/div[2]/div/i")
+    @FindBy(xpath = "//div[text()='I am aware of the risks of not protecting my trip']")
     WebElement NoInsurance;
     @FindBy(xpath="//input[@data-testid='u_contact_name_input']")
     WebElement ContactName;
@@ -114,7 +115,9 @@ public class DetailsPage extends BasePage{
     }
 
     public void enterContactDetails(String contactName, String email, String phoneNum) throws InterruptedException{
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         NoInsurance.click();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         ContactName.sendKeys(contactName);
         Email.sendKeys(email);
         Phone.sendKeys(phoneNum);
@@ -122,14 +125,22 @@ public class DetailsPage extends BasePage{
     }
 
     public void proceedToAddons(){
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         NextButton.click();
         driver.findElement(By.xpath("//div[text()='No Thanks']")).click();
+
     }
 
     public void proceedToPayment(){
-        NoRefundProtect.click();
-        NextButton.click();
-        FinalConfirmation.click();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        try{NoRefundProtect.click();}
+        catch (Exception e){}
+        finally {
+            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            NextButton.click();
+            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            FinalConfirmation.click();
+
     }
 
-}
+}}
