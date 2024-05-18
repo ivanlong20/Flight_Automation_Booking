@@ -23,7 +23,6 @@ public class HomePage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         WebElement cheapestButton = wait.until(ExpectedConditions.elementToBeClickable(SortBarCheapest));
         cheapestButton.click();
-
     }
 
     public void selectFlights(){

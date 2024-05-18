@@ -16,7 +16,7 @@ public class SearchFlightTest extends BaseTest{
         HomePage homePage = new HomePage(driver);
         DetailsPage detailsPage = new DetailsPage(driver);
         String dcity = "hkg";
-        String acity = "tyo";
+        String acity = "bkk";
         String ddate = "2024-06-01";
         String rdate = "2024-06-07";
         driver.get("https://hk.trip.com/flights/hong-kong-to-tokyo/tickets-hkg-tyo?dcity="+dcity+"&acity="+acity+"&ddate="+ ddate+"&rdate="+ rdate+"&flighttype=rt&class=y&lowpricesource=searchform&quantity=1&searchboxarg=t&nonstoponly=off&locale=en-HK&curr=HKD");
@@ -29,6 +29,10 @@ public class SearchFlightTest extends BaseTest{
         Set<String> set = driver.getWindowHandles();
         System.out.println(set);
         driver.switchTo().window((String) set.toArray()[1]);
-        detailsPage.enterPassengerDetails("Tai Man", "Chan", "Male");
+        detailsPage.enterPassportDetails("Hong Kong", "NC8841947","18","May","2027");
+        detailsPage.enterPassengerDetails("Tai Man", "Chan", "Male", "20","Jan","2001");
+        detailsPage.enterContactDetails("Chan Tai Man", "tmchan_test@gmail.com", "98761234");
+        detailsPage.proceedToAddons();
+        detailsPage.proceedToPayment();
     }
 }
